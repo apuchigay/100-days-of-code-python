@@ -1,3 +1,5 @@
 /.venv/
+/.idea/
 *.jpg
 *.pyc
+tests.py
