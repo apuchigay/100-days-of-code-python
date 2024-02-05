@@ -1,5 +1,7 @@
 from turtle import Screen
 from snake import Snake
+from food import Food
+from scoreboard import Scoreboard
 import time
 
 screen = Screen()
@@ -11,6 +13,8 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 
 snakes = Snake()
+food = Food()
+scoreboard = Scoreboard()
 
 screen.listen()  # escuchamos el input de teclado
 screen.onkey(fun=snakes.move_up, key="Up")
@@ -22,7 +26,13 @@ game_is_on = True
 while game_is_on:
     # Actualiza la pantalla luego de que todos los movimientos de la serpiente se hayan hecho
     screen.update()
-    time.sleep(0.1)
+    time.sleep(0.08)
     snakes.move()
+    scoreboard.write_score()
+
+    # Detecta la colision entre objetos
+    if snakes.head.distance(food) < 15:
+        food.refresh()
+        scoreboard.increase_score()
 
 screen.mainloop()
