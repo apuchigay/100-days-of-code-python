@@ -1,5 +1,5 @@
 from turtle import Turtle
-X_POSITION = 0
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
 
 UP = 90
@@ -16,14 +16,19 @@ class Snake:
 
     def creating_snake_body(self):
         """Metodo que crea el cuerpo inicial de la serpiente a partir de una lista"""
-        global X_POSITION
-        for i in range(3):
-            self.snakes.append(Turtle(shape="square"))
-            self.snakes[i].penup()
-            self.snakes[i].color("white")
-            self.snakes[i].goto(-X_POSITION, y=0)
-            X_POSITION += 20
-        return self.snakes
+        for position in STARTING_POSITIONS:
+            self.add_segment(position)
+
+    def add_segment(self, position):
+        new_segment = Turtle("square")
+        new_segment.color("white")
+        new_segment.penup()
+        new_segment.goto(position)
+        self.snakes.append(new_segment)
+
+    def extend(self):
+        """Añade un nuevo segmento a la serpiente"""
+        self.add_segment(self.snakes[-1].position())
 
     def move(self):
         """Mueve de forma automatica a la serpiente. No recibe parametros"""
