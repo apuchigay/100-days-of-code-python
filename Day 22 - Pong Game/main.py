@@ -1,40 +1,24 @@
-import turtle
-from turtle import Screen, Turtle
+from turtle import Screen
+from paddle import Paddle
 
 win = Screen()
 
 # Definimos las caracteristicas basicas de la pantalla
 win.bgcolor("black")
 win.title("Pong game 🏓")
-turtle.speed("fastest")  # Elimina la animación de movimiento de la posición
 
 # Definimos dimensiones y delay de las animaciones en pantalla
 win.setup(width=800, height=600)
 win.tracer(0)
 
-paddle = Turtle("square")
-paddle.color("white")
-paddle.shapesize(stretch_wid=5, stretch_len=1)
-
-# Definir la posición en pantalla de la paleta
-paddle.penup()
-paddle.goto(360, 0)
-
-
-# Escucha las teclas del usuario
-def move_up():
-    new_y = paddle.ycor() + 20
-    paddle.goto(paddle.xcor(), new_y)
-
-
-def move_down():
-    new_y = paddle.ycor() - 20
-    paddle.goto(paddle.xcor(), new_y)
-
+paddle_r = Paddle("r")
+paddle_l = Paddle("l")
 
 win.listen()
-win.onkeypress(move_up, "Up")
-win.onkeypress(move_down, "Down")
+win.onkeypress(paddle_r.move_up, "Up")
+win.onkeypress(paddle_r.move_down, "Down")
+win.onkeypress(paddle_l.move_up, "w")
+win.onkeypress(paddle_l.move_down, "s")
 
 game_on = True
 while game_on:
