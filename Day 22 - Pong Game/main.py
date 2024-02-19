@@ -12,24 +12,23 @@ win.setup(width=800, height=600)
 win.tracer(0)
 
 # Creamos las dos paletas
-paddle_r = Paddle("r")
-paddle_l = Paddle("l")
+r_paddle = Paddle("r")
+l_paddle = Paddle("l")
 
 # Creamos la pelota
-ball = Ball()
+ball = Ball(r_paddle, l_paddle)
 
 win.listen()
-win.onkeypress(paddle_r.move_up, "Up")
-win.onkeypress(paddle_r.move_down, "Down")
-win.onkeypress(paddle_l.move_up, "w")
-win.onkeypress(paddle_l.move_down, "s")
+win.onkeypress(r_paddle.move_up, "Up")
+win.onkeypress(r_paddle.move_down, "Down")
+win.onkeypress(l_paddle.move_up, "w")
+win.onkeypress(l_paddle.move_down, "s")
 
 game_on = True
 while game_on:
     time.sleep(.05)
     win.update()
     ball.move()
-
 
 win.exitonclick()
 
